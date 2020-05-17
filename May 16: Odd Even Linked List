@@ -1,0 +1,49 @@
+/**
+Given a singly linked list, group all odd nodes together followed by the even nodes. 
+Please note here we are talking about the node number and not the value in the nodes.
+
+You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.
+
+NOTE:
+The relative order inside both the even and odd groups should remain as it was in the input.
+The first node is considered odd, the second node even and so on ...
+
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        ListNode odd = head;
+        ListNode even= head.next;
+        ListNode Firsteven = even;
+        
+        //if first or second nodes are null, then there's only 0 or 1 nodes
+        while (0==0){
+            if(odd==null || even == null || (even.next)==null)
+            {
+                odd.next=Firsteven;
+                break;
+            }
+            //put all odd elements together
+            odd.next= even.next;
+            odd = even.next;
+            //if no more even nodes, stop iterating + add on even linked list
+            if (odd.next==null)
+            {
+                even.next=null;
+                odd.next=Firsteven;
+                break;
+            }
+            //put all even elements together
+            even.next=odd.next;
+            even=odd.next;
+        }
+        return head;
+    }
+}
