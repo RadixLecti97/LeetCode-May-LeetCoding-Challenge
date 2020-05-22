@@ -7,12 +7,27 @@ Each letter in the magazine string can only be used once in your ransom note.
 
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
+        //working with individual chars so chararray
+        char[] arr =magazine.toCharArray();
         
-        if (magazine.contains(ransomNote)){
-            return true;
+        
+        //create a incrementing char count for all letters in alphabet
+        int[]countletters = new int[26];
+        for (char c : arr){
+            countletters[c-'a']++;
         }
-        else{
-            return false;
+        arr = ransomNote.toCharArray();
+        //return false if there are more letters in ransom note than in magazine
+        //else return true
+        for(char c : arr){
+            if(countletters[c-'a']>0){
+                countletters[c-'a']--;
+            }
+            else{
+                return false;
+            }
         }
+        return true;
     }
+
 }
